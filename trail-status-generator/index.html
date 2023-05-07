@@ -113,22 +113,22 @@
     $(document).ready(function(){
 
         $(function () {
-        $("#copy_verbiage").click(function () {
-            var copiedText = $("#verbiage").val();
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(copiedText)
-                    .then(() => {
-                        alert("verbiage copied to clipboard!");
-                    })
-                    .catch((error) => {
-                        alert("Copy error. Please report issue and then copy manually or try different browser");
-                    });
-            } else {
-                alert("Copying not supported; please report issue and then copy manually or try different browser");
-            }
+            $("#copy_verbiage").click(function () {
+                var copiedText = $("#verbiage").val();
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(copiedText)
+                        .then(() => {
+                            alert("verbiage copied to clipboard!");
+                        })
+                        .catch((error) => {
+                            alert("Copy error. Please report issue and then copy manually or try different browser");
+                        });
+                } else {
+                    alert("Copying not supported; please report issue and then copy manually or try different browser");
+                }
 
+            });
         });
-    });
 
         $("#open_big_creek").click(function(){
             $("#cross_country_o").prop("checked", true);
