@@ -30,7 +30,7 @@
     <br>
     <br>
     <label for="verbiage">Generated Status Text (manually copy/paste this to Twitter)</label><br>
-    <textarea id="verbiage" rows="13" cols="25">
+    <textarea id="verbiage" rows="13" cols="50">
     </textarea>
 </form>
 
@@ -52,14 +52,34 @@
         return " "+label+": "+formatStatusValue(value) + "\n";
     }
 
+    function getFormattedDate(dateTime) {
+        return dateTime.toLocaleString('en-US', { weekday: 'short', month: 'numeric', day: 'numeric' });
+        //return dateTime.toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    }
+
+    function getFormattedTime(dateTime) {
+        return dateTime.toLocaleTimeString('en-US', { hour: "2-digit", minute: "2-digit" });
+    }
+
+    function getIntroVerbiage() {
+        var currentDateTime = new Date();
+        // for testing different date/times:
+        // currentDateTime = new Date('June 1, 2023 23:24:15');
+        return "Trail status as of " + getFormattedDate(currentDateTime)
+                + " at " + getFormattedTime(currentDateTime) + ":\n";
+    }
+
 
     $(document).ready(function(){
         $("input[type='button']").click(function(){
             var cross_country = $("input[name='cross_country']:checked").val();
             var freeride = $("input[name='freeride']:checked").val();
 
-            var verbiage = "Big Creek\n"
-            //verbiage += "\u274C \u2705   \n"
+
+            var verbiage = ""
+            verbiage += getIntroVerbiage();
+            verbiage += "\n";
+            verbiage += "Big Creek\n";
             verbiage += formatLine("Cross Country", cross_country);
             verbiage += formatLine("Freeride", freeride);
 
