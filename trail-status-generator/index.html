@@ -67,9 +67,10 @@
     </li>
     <br>
     <input type="button" id="generate" value="Generate Trail Status Verbiage">
+    <input type="button" id="copy_verbiage" value="Copy verbiage">
     <br>
     <br>
-    <label for="verbiage">Generated Status Text (manually copy/paste this to Twitter)</label><br>
+    <label for="verbiage">Generated Trails Status Text</label><br>
     <textarea id="verbiage" rows="15" cols="50">
     </textarea>
 </form>
@@ -110,6 +111,24 @@
 
 
     $(document).ready(function(){
+
+        $(function () {
+        $("#copy_verbiage").click(function () {
+            var copiedText = $("#verbiage").val();
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copiedText)
+                    .then(() => {
+                        alert("verbiage copied to clipboard!");
+                    })
+                    .catch((error) => {
+                        alert("Copy error. Please report issue and then copy manually or try different browser");
+                    });
+            } else {
+                alert("Copying not supported; please report issue and then copy manually or try different browser");
+            }
+
+        });
+    });
 
         $("#open_big_creek").click(function(){
             $("#cross_country_o").prop("checked", true);
@@ -167,6 +186,8 @@
         });
 
     });
+
+
     </script>
 
 </body>
