@@ -8,8 +8,9 @@
 <body>
 
 <form>
-    <H1>Generate New Status Verbiage</H1>
-    <H2>Big Creek</H2>
+    Big Creek
+    <input type="button" id="open_big_creek" value="Open">
+    <input type="button" id="close_big_creek" value="Close">
     <li>
         Cross Country
         <input type="radio" id="cross_country_o" name="cross_country" checked="checked" value="O">
@@ -24,10 +25,25 @@
         <input type="radio" id="freeride_c" name="freeride" value="C">
         <label for="freeride_c">Closed</label>
     </li>
-    <H2>Other Trail Systems</H2>
-    <li>TODO</li>
+    Other Trail Systems
+    <input type="button" id="open_other" value="Open">
+    <input type="button" id="close_other" value="Close">
+    <li>
+        Charleston Park
+        <input type="radio" id="charleston_o" name="charleston" checked="checked" value="O">
+        <label for="charleston_o">Open</label>
+        <input type="radio" id="charleston_c" name="charleston" value="C">
+        <label for="charleston_c">Closed</label>
+    </li>
+    <li>
+        Haw Creek
+        <input type="radio" id="haw_creek_o" name="haw_creek" checked="checked" value="O">
+        <label for="haw_creek_o">Open</label>
+        <input type="radio" id="haw_creek_c" name="haw_creek" value="C">
+        <label for="haw_creek_c">Closed</label>
+    </li>
     <br>
-    <input type="button" value="Generate Trail Status Verbiage">
+    <input type="button" id="generate" value="Generate Trail Status Verbiage">
     <br>
     <br>
     <label for="verbiage">Generated Status Text (manually copy/paste this to Twitter)</label><br>
@@ -71,10 +87,33 @@
 
 
     $(document).ready(function(){
-        $("input[type='button']").click(function(){
+
+        $("#open_big_creek").click(function(){
+            $("#cross_country_o").prop("checked", true);
+            $("#freeride_o").prop("checked", true);
+        });
+
+        $("#close_big_creek").click(function(){
+            $("#cross_country_c").prop("checked", true);
+            $("#freeride_c").prop("checked", true);
+        });
+
+        $("#open_other").click(function(){
+            $("#charleston_o").prop("checked", true);
+            $("#haw_creek_o").prop("checked", true);
+        });
+
+        $("#close_other").click(function(){
+            $("#charleston_c").prop("checked", true);
+            $("#haw_creek_c").prop("checked", true);
+        });
+
+        //$("input[type='button']").click(function(){
+        $("#generate").click(function(){
             var cross_country = $("input[name='cross_country']:checked").val();
             var freeride = $("input[name='freeride']:checked").val();
-
+            var charleston = $("input[name='charleston']:checked").val();
+            var haw_creek = $("input[name='haw_creek']:checked").val();
 
             var verbiage = ""
             verbiage += getIntroVerbiage();
@@ -82,6 +121,10 @@
             verbiage += "Big Creek\n";
             verbiage += formatLine("Cross Country", cross_country);
             verbiage += formatLine("Freeride", freeride);
+            verbiage += "\n";
+            verbiage += "Other Trail Systems\n";
+            verbiage += formatLine("Charleston Park", charleston);
+            verbiage += formatLine("Haw Creek", haw_creek);
 
             // set text area
             $("#verbiage").val(verbiage);
