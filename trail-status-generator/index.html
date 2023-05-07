@@ -66,11 +66,9 @@
         <label for="mt_adams_c">Closed</label>
     </li>
     <br>
-    <input type="button" id="generate" value="Generate Trail Status Verbiage">
-    <input type="button" id="copy_verbiage" value="Copy verbiage">
+    <input type="button" id="copy_verbiage" value="Copy following generated trails status verbiage">
     <br>
     <br>
-    <label for="verbiage">Generated Trails Status Text</label><br>
     <textarea id="verbiage" rows="15" cols="50">
     </textarea>
 </form>
@@ -110,7 +108,37 @@
     }
 
 
+    function generateVerbiage() {
+        var cross_country = $("input[name='cross_country']:checked").val();
+        var freeride = $("input[name='freeride']:checked").val();
+        var pump_tracks = $("input[name='pump_tracks']:checked").val();
+        var charleston = $("input[name='charleston']:checked").val();
+        var haw_creek = $("input[name='haw_creek']:checked").val();
+        var matt_park = $("input[name='matt_park']:checked").val();
+        var mt_adams = $("input[name='mt_adams']:checked").val();
+
+        var verbiage = ""
+        verbiage += getIntroVerbiage();
+        verbiage += "\n";
+        verbiage += "Big Creek\n";
+        verbiage += formatLine("Cross Country", cross_country);
+        verbiage += formatLine("Freeride", freeride);
+        verbiage += formatLine("Pump Tracks", pump_tracks);
+        verbiage += "\n";
+        verbiage += "Other Trail Systems\n";
+        verbiage += formatLine("Charleston Park", charleston);
+        verbiage += formatLine("Haw Creek", haw_creek);
+        verbiage += formatLine("Matt Park", matt_park);
+        verbiage += formatLine("Mt. Adams", mt_adams);
+
+        // set text area
+        $("#verbiage").val(verbiage);
+
+    }
+
     $(document).ready(function(){
+
+        generateVerbiage();
 
         $(function () {
             $("#copy_verbiage").click(function () {
@@ -134,12 +162,14 @@
             $("#cross_country_o").prop("checked", true);
             $("#freeride_o").prop("checked", true);
             $("#pump_tracks_o").prop("checked", true);
+            generateVerbiage();
         });
 
         $("#close_big_creek").click(function(){
             $("#cross_country_c").prop("checked", true);
             $("#freeride_c").prop("checked", true);
             $("#pump_tracks_c").prop("checked", true);
+            generateVerbiage();
         });
 
         $("#open_other").click(function(){
@@ -147,6 +177,7 @@
             $("#haw_creek_o").prop("checked", true);
             $("#matt_park_o").prop("checked", true);
             $("#mt_adams_o").prop("checked", true);
+            generateVerbiage();
         });
 
         $("#close_other").click(function(){
@@ -154,41 +185,14 @@
             $("#haw_creek_c").prop("checked", true);
             $("#matt_park_c").prop("checked", true);
             $("#mt_adams_c").prop("checked", true);
+            generateVerbiage();
         });
 
-        //$("input[type='button']").click(function(){
-        $("#generate").click(function(){
-            var cross_country = $("input[name='cross_country']:checked").val();
-            var freeride = $("input[name='freeride']:checked").val();
-            var pump_tracks = $("input[name='pump_tracks']:checked").val();
-            var charleston = $("input[name='charleston']:checked").val();
-            var haw_creek = $("input[name='haw_creek']:checked").val();
-            var matt_park = $("input[name='matt_park']:checked").val();
-            var mt_adams = $("input[name='mt_adams']:checked").val();
-
-            var verbiage = ""
-            verbiage += getIntroVerbiage();
-            verbiage += "\n";
-            verbiage += "Big Creek\n";
-            verbiage += formatLine("Cross Country", cross_country);
-            verbiage += formatLine("Freeride", freeride);
-            verbiage += formatLine("Pump Tracks", pump_tracks);
-            verbiage += "\n";
-            verbiage += "Other Trail Systems\n";
-            verbiage += formatLine("Charleston Park", charleston);
-            verbiage += formatLine("Haw Creek", haw_creek);
-            verbiage += formatLine("Matt Park", matt_park);
-            verbiage += formatLine("Mt. Adams", mt_adams);
-
-            // set text area
-            $("#verbiage").val(verbiage);
-
+        $("form :input").change(function() {
+            generateVerbiage();
         });
 
     });
-
-
     </script>
-
 </body>
 </html>
