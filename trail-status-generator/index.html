@@ -66,8 +66,8 @@
         <label for="mt_adams_c">Closed</label>
     </li>
     <br>
-    <input type="button" id="copy_verbiage" value="Copy following generated trails status verbiage">
-    <br>
+<!--    <input type="button" id="copy_verbiage" value="Copy following trail status">-->
+    <div>Note: the following verbiage will be automatically copied to your clipboard as it changes</div>
     <br>
     <textarea id="verbiage" rows="15" cols="50">
     </textarea>
@@ -134,29 +134,46 @@
         // set text area
         $("#verbiage").val(verbiage);
 
+        copyToClipboard();
+
+    }
+
+    function copyToClipboard() {
+       var copiedText = $("#verbiage").val();
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(copiedText)
+                .then(() => {
+                    console.log("verbiage copied to clipboard!");
+                })
+                .catch((error) => {
+                    alert("Copy error. Please report issue and then copy manually or try different browser");
+                });
+        } else {
+            alert("Copying not supported; please report issue and then copy manually or try different browser");
+        }
     }
 
     $(document).ready(function(){
 
-        generateVerbiage();
+        //generateVerbiage();
 
-        $(function () {
-            $("#copy_verbiage").click(function () {
-                var copiedText = $("#verbiage").val();
-                if (navigator.clipboard) {
-                    navigator.clipboard.writeText(copiedText)
-                        .then(() => {
-                            alert("verbiage copied to clipboard!");
-                        })
-                        .catch((error) => {
-                            alert("Copy error. Please report issue and then copy manually or try different browser");
-                        });
-                } else {
-                    alert("Copying not supported; please report issue and then copy manually or try different browser");
-                }
+<!--        $(function () {-->
+<!--            $("#copy_verbiage").click(function () {-->
+<!--                var copiedText = $("#verbiage").val();-->
+<!--                if (navigator.clipboard) {-->
+<!--                    navigator.clipboard.writeText(copiedText)-->
+<!--                        .then(() => {-->
+<!--                            console.log("verbiage copied to clipboard!");-->
+<!--                        })-->
+<!--                        .catch((error) => {-->
+<!--                            alert("Copy error. Please report issue and then copy manually or try different browser");-->
+<!--                        });-->
+<!--                } else {-->
+<!--                    alert("Copying not supported; please report issue and then copy manually or try different browser");-->
+<!--                }-->
 
-            });
-        });
+<!--            });-->
+<!--        });-->
 
         $("#open_big_creek").click(function(){
             $("#cross_country_o").prop("checked", true);
