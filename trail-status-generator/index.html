@@ -9,9 +9,12 @@
 <body>
 
 <form>
+    <input type="button" id="open_all" value="Open All">
+    <input type="button" id="close_all" value="Close All">
+    <br/>
     <b>Big Creek</b>
-    <input type="button" id="open_big_creek" value="Open">
-    <input type="button" id="close_big_creek" value="Close">
+    <input type="button" id="open_big_creek" value="Open Big Creek">
+    <input type="button" id="close_big_creek" value="Close Big Creek">
     <li>
         Cross Country
         <input type="radio" id="cross_country_o" name="cross_country" checked="checked" value="O">
@@ -35,8 +38,8 @@
     </li>
 
     <b>Other Trail Systems</b>
-    <input type="button" id="open_other" value="Open">
-    <input type="button" id="close_other" value="Close">
+    <input type="button" id="open_other" value="Open Other">
+    <input type="button" id="close_other" value="Close Other">
     <li>
         Charleston Park
         <input type="radio" id="charleston_o" name="charleston" checked="checked" value="O">
@@ -158,30 +161,32 @@
 
     $(document).ready(function(){
 
-        //generateVerbiage();
-
-<!--        $(function () {-->
-<!--            $("#copy_verbiage").click(function () {-->
-<!--                var copiedText = $("#verbiage").val();-->
-<!--                if (navigator.clipboard) {-->
-<!--                    navigator.clipboard.writeText(copiedText)-->
-<!--                        .then(() => {-->
-<!--                            console.log("verbiage copied to clipboard!");-->
-<!--                        })-->
-<!--                        .catch((error) => {-->
-<!--                            alert("Copy error. Please report issue and then copy manually or try different browser");-->
-<!--                        });-->
-<!--                } else {-->
-<!--                    alert("Copying not supported; please report issue and then copy manually or try different browser");-->
-<!--                }-->
-
-<!--            });-->
-<!--        });-->
+        $("#open_all").click(function(){
+            $("#cross_country_o").prop("checked", true);
+            $("#freeride_o").prop("checked", true);
+            $("#pump_tracks_o").prop("checked", true);
+            $("#charleston_o").prop("checked", true);
+            $("#haw_creek_o").prop("checked", true);
+            $("#matt_park_o").prop("checked", true);
+            $("#mt_adams_o").prop("checked", true);
+            generateVerbiage();
+        });
 
         $("#open_big_creek").click(function(){
             $("#cross_country_o").prop("checked", true);
             $("#freeride_o").prop("checked", true);
             $("#pump_tracks_o").prop("checked", true);
+            generateVerbiage();
+        });
+
+        $("#close_all").click(function(){
+            $("#cross_country_c").prop("checked", true);
+            $("#freeride_c").prop("checked", true);
+            $("#pump_tracks_c").prop("checked", true);
+            $("#charleston_c").prop("checked", true);
+            $("#haw_creek_c").prop("checked", true);
+            $("#matt_park_c").prop("checked", true);
+            $("#mt_adams_c").prop("checked", true);
             generateVerbiage();
         });
 
