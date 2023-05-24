@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>West Georgia Trail Status Generator</title>
+    <link rel="icon" type="image/x-icon" href="./images/west_ga_400x400.jpg">
+</head>
+<body>
+<form>
+    <input type="button" id="open_all" value="Open ALL &#x2705;">
+    <input type="button" id="close_all" value="Close ALL &#x274C;">
+    <br/>
+    <li>
+        Allatoona Creek
+        <input type="radio" id="allatoona_o" name="allatoona" checked="checked" value="O">
+        <label for="allatoona_o">Open</label>
+        <input type="radio" id="allatoona_c" name="allatoona" value="C">
+        <label for="allatoona_c">Closed</label>
+    </li>
+    <li>
+        Pitner Bike Park
+        <input type="radio" id="pitner_o" name="pitner" checked="checked" value="O">
+        <label for="pitner_o">Open</label>
+        <input type="radio" id="pitner_c" name="pitner" value="C">
+        <label for="pitner_c">Closed</label>
+    </li>
+    <li>
+        Pumpkin Vine
+        <input type="radio" id="pumpkin_o" name="pumpkin" checked="checked" value="O">
+        <label for="pumpkin_o">Open</label>
+        <input type="radio" id="pumpkin_c" name="pumpkin" value="C">
+        <label for="pumpkin_c">Closed</label>
+    </li>
+    <li>
+        Mt Tabor
+        <input type="radio" id="mt_tabor_o" name="mt_tabor" checked="checked" value="O">
+        <label for="mt_tabor_o">Open</label>
+        <input type="radio" id="mt_tabor_c" name="mt_tabor" value="C">
+        <label for="mt_tabor_c">Closed</label>
+    </li>
+    <li>
+        Lost Mountain
+        <input type="radio" id="lost_o" name="lost" checked="checked" value="O">
+        <label for="lost_o">Open</label>
+        <input type="radio" id="lost_c" name="lost" value="C">
+        <label for="mt_tabor_c">Closed</label>
+    </li>
+    <li>
+        Sara Babb
+        <input type="radio" id="sara_babb_o" name="sara_babb" checked="checked" value="O">
+        <label for="sara_babb_o">Open</label>
+        <input type="radio" id="sara_babb_c" name="sara_babb" value="C">
+        <label for="sara_babb_c">Closed</label>
+    </li>
+    <br>
+    <div>Note: the verbiage below will <b>automatically copy</b> into your clipboard. When done, click
+        <a href="https://twitter.com/compose/tweet" target="_blank">https://twitter.com/compose/tweet</a>
+        and <b>paste</b> into <b>Twitter</b>.
+    </div>
+    <textarea id="verbiage" rows="10" cols="50">
+    </textarea>
+</form>
+<H3>Status webpage: <a href="https://www.sorbawestgeorgia.org/status" target="_blank">https://www.sorbawestgeorgia.org/status</a></H3>
+<H3>Last two Tweets:</H3>
+<!--https://developer.twitter.com/en/docs/twitter-for-websites/timelines/overview-->
+<a class="twitter-timeline" data-tweet-limit="2" data-width="400" href="https://twitter.com/trailstatuswga">Tweets by rambomtbstatus</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    function formatStatusValue(value) {
+        if (value=='O') {
+            return "\u2705"
+        } else {
+            return "\u274C"
+        }
+    }
+
+    function formatLine(label, value) {
+        return "\n"+label+": "+formatStatusValue(value);
+    }
+
+    function getFormattedDate(dateTime) {
+        return dateTime.toLocaleString('en-US', { weekday: 'short', month: 'numeric', day: 'numeric' });
+    }
+
+    function getFormattedTime(dateTime) {
+        return dateTime.toLocaleTimeString('en-US', { hour: "2-digit", minute: "2-digit" });
+    }
+
+    function getIntroVerbiage() {
+        var currentDateTime = new Date();
+        // for testing different date/times:
+        // currentDateTime = new Date('June 1, 2023 23:24:15');
+        return "Trail status as of " + getFormattedDate(currentDateTime)
+                + " at " + getFormattedTime(currentDateTime) + ":\n";
+    }
+
+
+    function generateVerbiage() {
+        var allatoona = $("input[name='allatoona']:checked").val();
+        var pitner = $("input[name='pitner']:checked").val();
+        var pumpkin = $("input[name='pumpkin']:checked").val();
+        var mt_tabor = $("input[name='mt_tabor']:checked").val();
+        var lost = $("input[name='lost']:checked").val();
+        var sara_babb = $("input[name='sara_babb']:checked").val();
+        var matt_park = $("input[name='matt_park']:checked").val();
+        var mt_adams = $("input[name='mt_adams']:checked").val();
+
+        var verbiage = ""
+        verbiage += getIntroVerbiage();
+        verbiage += formatLine("Allatoona Creek", allatoona);
+        verbiage += formatLine("Pitner Bike Park", pitner);
+        verbiage += formatLine("Pumpkin Vine", pumpkin);
+        verbiage += formatLine("Mt Tabor", mt_tabor);
+        verbiage += formatLine("Lost Mountain", lost);
+        verbiage += formatLine("Sara Babb (under construction)", sara_babb);
+
+        // set text area
+        $("#verbiage").val(verbiage);
+
+        copyToClipboard();
+
+    }
+
+    function copyToClipboard() {
+       var copiedText = $("#verbiage").val();
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(copiedText)
+                .then(() => {
+                    console.log("verbiage copied to clipboard!");
+                })
+                .catch((error) => {
+                    alert("Copy error. Please report issue and then copy manually or try different browser");
+                });
+        } else {
+            alert("Copying not supported; please report issue and then copy manually or try different browser");
+        }
+    }
+
+    $(document).ready(function(){
+
+        $("#open_all").click(function(){
+            $("#allatoona_o").prop("checked", true);
+            $("#pitner_o").prop("checked", true);
+            $("#pumpkin_o").prop("checked", true);
+            $("#mt_tabor_o").prop("checked", true);
+            $("#lost_o").prop("checked", true);
+            $("#sara_babb_o").prop("checked", false);
+            generateVerbiage();
+        });
+
+          $("#close_all").click(function(){
+            $("#allatoona_c").prop("checked", true);
+            $("#pitner_c").prop("checked", true);
+            $("#pumpkin_c").prop("checked", true);
+            $("#mt_tabor_c").prop("checked", true);
+            $("#lost_c").prop("checked", true);
+            $("#sara_babb_c").prop("checked", true);
+            generateVerbiage();
+        });
+
+        $("form :input").change(function() {
+            generateVerbiage();
+        });
+
+    });
+    </script>
+</body>
+</html>
