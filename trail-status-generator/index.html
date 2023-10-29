@@ -29,10 +29,11 @@
         <label for="freeride_o">Open</label>
         <input type="radio" id="freeride_c" name="freeride" value="C">
         <label for="freeride_c">Closed</label>
-            (Sub-closure: Hollywood:
-            <input type="checkbox" id="hollywood" name="hollywood" value="C">
-            Slalom:
-            <input type="checkbox" id="slalom" name="slalom" value="C">
+        <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sub-closures:
+            Hollywood: <input type="checkbox" id="hollywood" name="hollywood">
+            Slalom: <input type="checkbox" id="slalom" name="slalom">
+            Typhoon: <input type="checkbox" id="typhoon" name="slalom">
+            Dirt Jumps: <input type="checkbox" id="dirt_jumps" name="slalom">
             )
     </li>
     <li>
@@ -150,6 +151,8 @@
         var mt_adams = $("input[name='mt_adams']:checked").val();
         var hollywoodClosed = $('#hollywood').is(':checked');
         var slalomClosed = $('#slalom').is(':checked');
+        var typhoonClosed = $('#typhoon').is(':checked');
+        var dirt_jumps_Closed = $('#dirt_jumps').is(':checked');
 
 
         var verbiage = ""
@@ -171,6 +174,13 @@
         if (slalomClosed) {
             freeride_subclosure_set.add("Slalom");
         }
+        if (typhoonClosed) {
+            freeride_subclosure_set.add("Typhoon");
+        }
+        if (dirt_jumps_Closed) {
+            freeride_subclosure_set.add("Dirt Jumps");
+        }
+
         //console.log(freeride_subclosure_set);
         //console.log(freeride_subclosure_set.size);
 
