@@ -29,6 +29,11 @@
         <label for="freeride_o">Open</label>
         <input type="radio" id="freeride_c" name="freeride" value="C">
         <label for="freeride_c">Closed</label>
+            (Sub-closure: Hollywood:
+            <input type="checkbox" id="hollywood" name="hollywood" value="C">
+            Slalom:
+            <input type="checkbox" id="slalom" name="slalom" value="C">
+            )
     </li>
     <li>
         Pump Tracks
@@ -142,6 +147,10 @@
         var haw_creek = $("input[name='haw_creek']:checked").val();
         var matt_park = $("input[name='matt_park']:checked").val();
         var mt_adams = $("input[name='mt_adams']:checked").val();
+        var mt_adams = $("input[name='mt_adams']:checked").val();
+        var hollywoodClosed = $('#hollywood').is(':checked');
+        var slalomClosed = $('#slalom').is(':checked');
+
 
         var verbiage = ""
         verbiage += getIntroVerbiage();
@@ -154,8 +163,24 @@
 
         verbiage += formatLine("Freeride", freeride);
 
-        // temporary Typhoon closure
-        verbiage += "\n  (Slalom & Hollywood: CLOSED\u274C)"
+        // sub-closure
+        const freeride_subclosure_set = new Set();
+        if (hollywoodClosed) {
+            freeride_subclosure_set.add("Hollywood");
+        }
+        if (slalomClosed) {
+            freeride_subclosure_set.add("Slalom");
+        }
+        //console.log(freeride_subclosure_set);
+        //console.log(freeride_subclosure_set.size);
+
+        if (freeride_subclosure_set.size > 0) {
+             verbiage += "\n  ("
+             verbiage += Array.from(freeride_subclosure_set).join(' & ')
+             verbiage += ": CLOSED\u274C)";
+        }
+
+        //verbiage += "\n  (Slalom & Hollywood: CLOSED\u274C)"
 
         verbiage += formatLine("Pump Tracks", pump_tracks);
         verbiage += formatLine("Skills Kitchen(\u2B50NEW!\u2B50)", skills_kitchen);
