@@ -26,6 +26,13 @@
         <label for="pitner_c">Closed</label>
     </li>
     <li>
+        Wilderness Camp
+        <input type="radio" id="wilderness_o" name="wilderness" checked="checked" value="O">
+        <label for="pitner_o">Open</label>
+        <input type="radio" id="wilderness_c" name="wilderness" value="C">
+        <label for="pitner_c">Closed</label>
+    </li>
+    <li>
         Pumpkin Vine
         <input type="radio" id="pumpkin_o" name="pumpkin" checked="checked" value="O">
         <label for="pumpkin_o">Open</label>
@@ -102,6 +109,7 @@
     function generateVerbiage() {
         var allatoona = $("input[name='allatoona']:checked").val();
         var pitner = $("input[name='pitner']:checked").val();
+        var wilderness = $("input[name='wilderness']:checked").val();
         var pumpkin = $("input[name='pumpkin']:checked").val();
         var mt_tabor = $("input[name='mt_tabor']:checked").val();
         var lost = $("input[name='lost']:checked").val();
@@ -113,6 +121,7 @@
         verbiage += getIntroVerbiage();
         verbiage += formatLine("Allatoona Creek", allatoona);
         verbiage += formatLine("Pitner Bike Park", pitner);
+        verbiage += formatLine("Wilderness Camp", wilderness);
         verbiage += formatLine("Pumpkin Vine", pumpkin);
         verbiage += formatLine("Mt Tabor", mt_tabor);
         verbiage += formatLine("Lost Mountain", lost);
@@ -145,6 +154,7 @@
         $("#open_all").click(function(){
             $("#allatoona_o").prop("checked", true);
             $("#pitner_o").prop("checked", true);
+            $("#wilderness_o").prop("checked", true);
             $("#pumpkin_o").prop("checked", true);
             $("#mt_tabor_o").prop("checked", true);
             $("#lost_o").prop("checked", true);
@@ -155,6 +165,7 @@
           $("#close_all").click(function(){
             $("#allatoona_c").prop("checked", true);
             $("#pitner_c").prop("checked", true);
+            $("#wilderness_c").prop("checked", true);
             $("#pumpkin_c").prop("checked", true);
             $("#mt_tabor_c").prop("checked", true);
             $("#lost_c").prop("checked", true);
