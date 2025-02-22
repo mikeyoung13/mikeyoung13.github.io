@@ -168,6 +168,7 @@
         var mt_adams = $("input[name='mt_adams']:checked").val();
         var hollywoodClosed = $('#hollywood').is(':checked');
         var slalomClosed = $('#slalom').is(':checked');
+        var hawkeyeClosed = $('#hawkeye').is(':checked');
         var typhoonClosed = $('#typhoon').is(':checked');
         var dirt_jumps_Closed = $('#dirt_jumps').is(':checked');
 
@@ -190,6 +191,9 @@
         }
         if (slalomClosed) {
             freeride_subclosure_set.add("Slalom");
+        }
+        if (hawkeyeClosed) {
+            freeride_subclosure_set.add("Hawkeye");
         }
         if (typhoonClosed) {
             freeride_subclosure_set.add("Typhoon");
