@@ -147,6 +147,11 @@
         return "\n"+formatStatusValue(value)+label+"  ";
     }
 
+    function appendText(text) {
+        // 2 trailing spaces required for Squarespace markdown for "Manual line breaks"
+        return text+"  ";
+    }
+
     function getFormattedDate(dateTime) {
         return dateTime.toLocaleString('en-US', { weekday: 'short', month: 'numeric', day: 'numeric' });
     }
@@ -192,15 +197,16 @@
         // 2 trailing spaces required for Squarespace markdown for "Manual line breaks"
         verbiage += "## Big Creek  ";
         verbiage += formatLine("Cross Country", cross_country);
+
         // Quick Six XC closure
-        verbiage += "(\u274C Closed 10/11-10/12)";
+        verbiage += appendText("(\u274C Closed 10/11-10/12)");
 
         // temporary Troll closure
         // verbiage += "\n  (\u2B50Troll bridge replaced!\u2B50 \u2705)"
 
         verbiage += formatLine("Freeride", freeride);
         // Quick Six FR closure
-        verbiage += "(\u274C Closed 10/11-10/12)";
+        verbiage += appendText("(\u274C Closed 10/11-10/12)");
 
         // sub-closure
         const freeride_subclosure_set = new Set();
