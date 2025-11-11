@@ -189,8 +189,12 @@
         var haw_creek = $("input[name='haw_creek']:checked").val();
         var matt_park = $("input[name='matt_park']:checked").val();
 
-        const NEW_VERBIAGE = "\u2B50NEW!\u2B50"
-        var verbiage = ""
+        const NEW_VERBIAGE = "\u2B50NEW!\u2B50";
+        const WARNING_DINGBAT = "\u26A0";
+        const CLOSED_DINGBAT = "\u274C";
+        const CONSTRUCTION_SYMBOL = "\uDEA7"
+
+        var verbiage = "";
         verbiage += getIntroVerbiage();
         verbiage += "\n";
         // ## prefix required for Squarespace markdown for "Heading 2"
@@ -239,8 +243,12 @@
 
         //verbiage += "\n  (Slalom & Hollywood: CLOSED\u274C)"
 
-        verbiage += formatLine("Pump Tracks", pump_tracks);
-        verbiage += formatLine("Skills Kitchen", skills_kitchen);
+        //verbiage += formatLine("Pump Tracks", pump_tracks);
+        verbiage += appendText("\n"+WARNING_DINGBAT+" Pump Tracks (avoid construction)");
+
+        //verbiage += formatLine("Skills Kitchen", skills_kitchen);
+        verbiage += appendText("\n"+WARNING_DINGBAT+" Skills Kitchen (avoid construction)");
+
         // ## prefix required for Squarespace markdown for "Heading 2"
         // 2 trailing spaces required for Squarespace markdown for "Manual line breaks"
         verbiage += "\n## Alpharetta  ";
