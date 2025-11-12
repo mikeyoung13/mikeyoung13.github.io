@@ -192,7 +192,8 @@
         const NEW_VERBIAGE = "\u2B50NEW!\u2B50";
         const WARNING_DINGBAT = "\u26A0";
         const CLOSED_DINGBAT = "\u274C";
-        const CONSTRUCTION_SYMBOL = "\uDEA7"
+        const CONSTRUCTION_SYMBOL = "\uDEA7";
+        const STAR_SYMBOL = "\u2B50";
 
         var verbiage = "";
         verbiage += getIntroVerbiage();
@@ -243,11 +244,11 @@
 
         //verbiage += "\n  (Slalom & Hollywood: CLOSED\u274C)"
 
-        //verbiage += formatLine("Pump Tracks", pump_tracks);
-        verbiage += appendText("\n"+WARNING_DINGBAT+" Pump Tracks (avoid construction)");
+        verbiage += formatLine("Pump Tracks ("+STAR_SYMBOL+"upgraded!"+STAR_SYMBOL+")", pump_tracks);
+        // verbiage += appendText("\n"+WARNING_DINGBAT+" Pump Tracks (avoid construction)");
 
-        //verbiage += formatLine("Skills Kitchen", skills_kitchen);
-        verbiage += appendText("\n"+WARNING_DINGBAT+" Skills Kitchen (avoid construction)");
+        verbiage += formatLine("Skills Kitchen ("+STAR_SYMBOL+"upgraded!"+STAR_SYMBOL+")", skills_kitchen);
+        // verbiage += appendText("\n"+WARNING_DINGBAT+" Skills Kitchen (avoid construction)");
 
         // ## prefix required for Squarespace markdown for "Heading 2"
         // 2 trailing spaces required for Squarespace markdown for "Manual line breaks"
