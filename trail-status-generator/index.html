@@ -51,6 +51,7 @@
         <label for="freeride_c">Closed</label>
         <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sub-closures:
             Hollywood <input type="checkbox" id="hollywood" name="hollywood">,
+            Lower-Hollywood <input type="checkbox" id="lower_hollywood" name="lower_hollywood">,
             Slalom <input type="checkbox" id="slalom" name="slalom">,
             Hawkeye <input type="checkbox" id="hawkeye" name="hawkeye">,
             Typhoon <input type="checkbox" id="typhoon" name="typhoon">,
@@ -174,6 +175,7 @@
         var cross_country = $("input[name='cross_country']:checked").val();
         var freeride = $("input[name='freeride']:checked").val();
         var hollywoodClosed = $('#hollywood').is(':checked');
+        var lowerHollywoodClosed = $('#lower_hollywood').is(':checked');
         var slalomClosed = $('#slalom').is(':checked');
         var hawkeyeClosed = $('#hawkeye').is(':checked');
         var typhoonClosed = $('#typhoon').is(':checked');
@@ -219,6 +221,9 @@
         const freeride_subclosure_set = new Set();
         if (hollywoodClosed) {
             freeride_subclosure_set.add("Hollywood");
+        }
+        if (lowerHollywoodClosed) {
+            freeride_subclosure_set.add("Lower-Hollywood");
         }
         if (slalomClosed) {
             freeride_subclosure_set.add("Slalom");
